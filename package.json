@@ -1,0 +1,43 @@
+{
+  "name": "thc-wrk-loader",
+  "version": "0.1.0",
+  "description": "Utility for loading thc grenache workers",
+  "main": "index.js",
+  "scripts": {
+    "coverage": "nyc --reporter=html mocha",
+    "lint": "standard",
+    "format": "standard --fix",
+    "test": "npm run lint && npm run unit",
+    "unit": "NODE_ENV=test mocha ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThriveCoin/thc-wrk-loader-js.git"
+  },
+  "keywords": [
+    "thc",
+    "thrivecoin",
+    "thrive",
+    "worker",
+    "template",
+    "boilerplate"
+  ],
+  "author": {
+    "name": "vigan.abd",
+    "email": "vigan@thrivecoin.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ThriveCoin/thc-wrk-loader-js/issues"
+  },
+  "homepage": "https://github.com/ThriveCoin/thc-wrk-loader-js#readme",
+  "dependencies": {
+    "yargs": "^17.2.1"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0",
+    "sinon": "^12.0.1",
+    "thc-grc-server": "git+https://github.com/ThriveCoin/thc-grc-server-js.git"
+  }
+}
