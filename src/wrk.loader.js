@@ -4,12 +4,13 @@ const fs = require('fs')
 const path = require('path')
 const yargs = require('yargs')
 const { hideBin } = require('yargs/helpers')
+const resolveConfig = require('./resolve.config')
 
 /**
- * 
- * @param {string} ctxDir 
- * @param {(y: yargs) => yargs} [argvFunc] 
- * @returns 
+ *
+ * @param {string} ctxDir
+ * @param {(y: yargs) => yargs} [argvFunc]
+ * @returns {any}
  */
 const wrkLoader = (ctxDir, argvFunc = null) => {
   const defaultCliArgs = yargs(hideBin(process.argv))
@@ -53,12 +54,10 @@ const wrkLoader = (ctxDir, argvFunc = null) => {
   const confDir = path.join(ctxDir, 'config')
   const wrkDir = path.join(ctxDir, 'src', 'workers')
 
-  let commonConfPath = path.join(confDir, `${argv.env}.common.json`)
-  if (!fs.existsSync(commonConfPath)) commonConfPath = path.join(confDir, 'common.json')
+  const commonConfPath = resolveConfig(confDir, 'common.json', argv.env)
   if (!fs.existsSync(commonConfPath)) throw new Error('ERR_COMMON_CONF_MISSING')
 
-  let wrkConfPath = path.join(confDir, `${argv.env}.${argv.worker}.json`)
-  if (!fs.existsSync(wrkConfPath)) wrkConfPath = path.join(confDir, `${argv.worker}.json`)
+  const wrkConfPath = resolveConfig(confDir, `${argv.worker}.json`, argv.env)
 
   const wrkPath = path.join(wrkDir, argv.worker)
   if (!fs.existsSync(`${wrkPath}.js`)) throw new Error('ERR_WRK_NOT_FOUND')
