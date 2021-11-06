@@ -38,6 +38,7 @@
     "mocha": "^9.1.3",
     "nyc": "^15.1.0",
     "sinon": "^12.0.1",
+    "standard": "^16.0.4",
     "thc-grc-server": "git+https://github.com/ThriveCoin/thc-grc-server-js.git"
   }
 }
