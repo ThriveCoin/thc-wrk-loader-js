@@ -1,5 +1,5 @@
 {
-  "name": "thc-wrk-loader",
+  "name": "@thrivecoin/wrk-loader",
   "version": "0.1.0",
   "description": "Utility for loading thc grenache workers",
   "main": "index.js",
