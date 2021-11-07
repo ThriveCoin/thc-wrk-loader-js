@@ -1,6 +1,6 @@
 'use strict'
 
-const { GrcHttpWrk } = require('thc-grc-server')
+const { GrcHttpWrk } = require('@thrivecoin/grc-server')
 
 class WrkOther extends GrcHttpWrk {
   helloWorld () {
