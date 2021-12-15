@@ -1,10 +1,16 @@
 'use strict'
 
+const _omit = require('lodash/omit')
 const fs = require('fs')
 const path = require('path')
 const yargs = require('yargs')
 const { hideBin } = require('yargs/helpers')
 const resolveConfig = require('./resolve.config')
+
+const defaultOpts = [
+  '_', '$0', 'worker', 'w', 'port', 'p', 'env', 'e',
+  'announce', 'timeout', 'service-name'
+]
 
 /**
  *
@@ -72,6 +78,7 @@ const wrkLoader = (ctxDir, argvFunc = null) => {
   const CLASS = require(wrkPath)
 
   const wrk = new CLASS({
+    ..._omit(argv, defaultOpts),
     name: wrkServiceName,
     port: argv.port,
     grape: conf.grape,

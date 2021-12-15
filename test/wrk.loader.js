@@ -116,6 +116,7 @@ describe('wrkLoader tests', () => {
   it('should support additonal yargs arguments via function', () => {
     processArgvStub.value(['node', 'index.js', '--worker=wrk.sample', '--env=test', '--port=7070', '--foo'])
 
-    wrkLoader(__dirname, (y) => y.option('foo', { demandOption: true }))
+    const wrk = wrkLoader(__dirname, (y) => y.option('foo', { demandOption: true }))
+    assert.ok(wrk.constructorOpts.foo)
   })
 })
