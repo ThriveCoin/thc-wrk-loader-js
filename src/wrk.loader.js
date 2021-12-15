@@ -85,7 +85,8 @@ const wrkLoader = (ctxDir, argvFunc = null) => {
     timeout: argv.timeout,
     announce: argv.announce,
     conf,
-    env: argv.env
+    env: argv.env,
+    ctxDir
   })
 
   return wrk
