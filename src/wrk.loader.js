@@ -23,8 +23,7 @@ const wrkLoader = (ctxDir, argvFunc = null) => {
     .option('port', {
       alias: 'p',
       type: 'number',
-      desc: 'worker port',
-      demandOption: true
+      desc: 'optional worker port, required only for workers that serve as grc servers'
     })
     .option('env', {
       alias: 'e',
@@ -45,7 +44,7 @@ const wrkLoader = (ctxDir, argvFunc = null) => {
     })
     .option('service-name', {
       type: 'string',
-      desc: 'optional service name, if provided will override config value'
+      desc: 'optional service name, required for grc server workers, if provided will override config value'
     })
     .help()
     .usage('$ index.js --worker=wrk.sample --env=development --port=7070')
@@ -68,7 +67,6 @@ const wrkLoader = (ctxDir, argvFunc = null) => {
   }
 
   const wrkServiceName = argv['service-name'] || conf.serviceName
-  if (!wrkServiceName) throw new Error('ERR_WRK_SERVICE_NAME_MISSING')
   delete conf.serviceName
 
   const CLASS = require(wrkPath)

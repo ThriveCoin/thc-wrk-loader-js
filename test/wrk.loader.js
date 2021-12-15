@@ -105,14 +105,11 @@ describe('wrkLoader tests', () => {
     })
   })
 
-  it('should fail when serviceName is missing', () => {
+  it('should not fail when serviceName is missing', () => {
     processArgvStub.value(['node', 'index.js', '--worker=wrk.sample', '--env=staging', '--port=7070'])
 
-    assert.throws(() => {
+    assert.doesNotThrow(() => {
       wrkLoader(__dirname)
-    }, (err) => {
-      assert.strictEqual(err.message, 'ERR_WRK_SERVICE_NAME_MISSING')
-      return true
     })
   })
 
