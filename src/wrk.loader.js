@@ -31,6 +31,11 @@ const wrkLoader = (ctxDir, argvFunc = null) => {
       type: 'number',
       desc: 'optional worker port, required only for workers that serve as grc servers'
     })
+    .option('ports', {
+      type: 'array',
+      desc: 'optional multi transport layer worker ports, required only for workers that support multiple transports for grc server',
+      coerce: (val) => val.map(x => +x)
+    })
     .option('env', {
       alias: 'e',
       type: 'string',
@@ -81,6 +86,7 @@ const wrkLoader = (ctxDir, argvFunc = null) => {
     ..._omit(argv, defaultOpts),
     name: wrkServiceName,
     port: argv.port,
+    ports: argv.ports,
     grape: conf.grape,
     timeout: argv.timeout,
     announce: argv.announce,

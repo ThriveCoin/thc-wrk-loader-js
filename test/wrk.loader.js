@@ -6,6 +6,7 @@ const assert = require('assert')
 const sinon = require('sinon')
 const { wrkLoader } = require('..')
 const WrkSample = require('./src/workers/wrk.sample')
+const WrkMulti = require('./src/workers/wrk.multi')
 const WrkOther = require('./src/workers/wrk.other')
 
 describe('wrkLoader tests', () => {
@@ -113,7 +114,15 @@ describe('wrkLoader tests', () => {
     })
   })
 
-  it('should support additonal yargs arguments via function', () => {
+  it('should support ports yargs arguments via function', () => {
+    processArgvStub.value(['node', 'index.js', '--worker=wrk.multi', '--env=test', '--ports=7070', '7072', '--foo'])
+
+    const wrk = wrkLoader(__dirname)
+    assert.ok(wrk instanceof WrkMulti)
+    assert.deepStrictEqual(wrk._ports, [7070, 7072])
+  })
+
+  it('should support additional yargs arguments via function', () => {
     processArgvStub.value(['node', 'index.js', '--worker=wrk.sample', '--env=test', '--port=7070', '--foo'])
 
     const wrk = wrkLoader(__dirname, (y) => y.option('foo', { demandOption: true }))
